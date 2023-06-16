@@ -14,13 +14,22 @@ const handleNewUser = async (req: Request, res: Response) => {
   try {
     // Encrypt the password
     const hashedPwd = await bcrypt.hash(password, 10); // 10 (salt) sets of random characters to form a hash with the password
-    // Create and store the new user
-    await prisma.user.create({
-      data: {
-        username,
-        password: hashedPwd,
-      },
+
+    // Create and store the new user with their respective initial role
+    await prisma.$transaction(async (transaction) => {
+      const user = await transaction.user.create({
+        data: {
+          username,
+          password: hashedPwd,
+        },
+      });
+      await transaction.role.create({
+        data: {
+          userId: user.id,
+        },
+      });
     });
+
     res.status(201).json({ success: `New user ${username} created!` });
   } catch (err: any) {
     res.status(500).json({ message: err.message });

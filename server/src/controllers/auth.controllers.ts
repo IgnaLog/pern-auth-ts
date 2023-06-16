@@ -26,9 +26,8 @@ const handleLogin = async (req: Request, res: Response) => {
 
     if (match) {
       // Format transformation after getting the results of the roles
-      const roles = foundUser.roles.map(({ rolename, roleId }) => ({
-        [rolename]: roleId,
-      }));
+      const roles: number[] = foundUser.roles.map((role) => role.roleId);
+
       // Create JWTs
       const accessToken = jwt.sign(
         {

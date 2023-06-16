@@ -12,12 +12,9 @@ import registerRoutes from "./routes/register.routes";
 import authRoutes from "./routes/auth.routes";
 import refreshRoutes from "./routes/refresh.routes";
 import logoutRoutes from "./routes/logout.routes";
-// import connectDB from "./config/dbConn";
+import "./config/dbConn";
 
 const app: Express = express();
-
-/* Connection to PostgreSQL */
-// connectDB();
 
 /* Middlewares */
 // Configuring Morgan to write to the log file
@@ -38,7 +35,7 @@ app.use(cookieParser());
 
 /* Routes */
 app.use("/register", registerRoutes);
-app.use("/auth", authRoutes);
+app.use("/login", authRoutes);
 app.use("/refresh", refreshRoutes);
 app.use("/logout", logoutRoutes);
 app.use(verifyJWT);

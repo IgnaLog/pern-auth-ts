@@ -1,9 +1,9 @@
 export interface IUser {
   username: string;
   roles: {
-    User: number;
-    Editor: number;
-    Admin: number;
+    USER: number;
+    EDITOR: number;
+    ADMIN: number;
   };
   password: string;
   refreshToken: string[];

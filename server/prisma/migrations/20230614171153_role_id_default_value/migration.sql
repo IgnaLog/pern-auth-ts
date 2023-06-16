@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "role" ALTER COLUMN "roleId" SET DEFAULT 2001;

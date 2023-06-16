@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import * as userService from "../../api/userService";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 const Users = () => {
   const [users, setUsers] = useState<string[]>([]);
   const navigate = useNavigate();
   const location = useLocation();
   const effectRan = useRef(false);
+  const axiosPrivate = useAxiosPrivate();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -14,7 +16,10 @@ const Users = () => {
     if (effectRan.current === true || import.meta.env.PROD) {
       const getUsers = async () => {
         try {
-          const response = await userService.loadUsers(controller.signal);
+          const response = await userService.loadUsers(
+            controller.signal,
+            axiosPrivate
+          );
           const userNames = response.data.map((user) => user.username);
           setUsers(userNames);
         } catch (err) {

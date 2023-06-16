@@ -60,9 +60,7 @@ const handleRefreshToken = async (req: Request, res: Response) => {
       if (foundUser.username !== decoded.username) throw new Error();
 
       // RefreshToken was still valid
-      const roles = foundUser.roles.map(({ rolename, roleId }) => ({
-        [rolename]: roleId,
-      }));
+      const roles: number[] = foundUser.roles.map((role) => role.roleId);
 
       const accessToken = jwt.sign(
         {

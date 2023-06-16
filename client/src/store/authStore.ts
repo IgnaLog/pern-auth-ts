@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { useDebugValue } from "react";
 
 type State = {
   accessToken: string;
@@ -27,8 +26,3 @@ export const useAuthStore = create<State & Actions>((set) => ({
       user: "",
     })),
 }));
-
-// Suscripción a cambios para useDebugValue
-useAuthStore.subscribe((state) => {
-  useDebugValue(state.user ? "Logged In" : "Logged Out");
-});

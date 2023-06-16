@@ -13,9 +13,9 @@ import PersistLogin from "./views/components/PersistLogin";
 import { Routes, Route } from "react-router-dom";
 
 const ROLES = {
-  User: 2001,
-  Editor: 1984,
-  Admin: 5150,
+  USER: 2001,
+  EDITOR: 1984,
+  ADMIN: 5150,
 };
 
 function App() {
@@ -30,20 +30,20 @@ function App() {
 
         {/* we want to protect these routes */}
         <Route element={<PersistLogin />}>
-          <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
+          <Route element={<RequireAuth allowedRoles={[ROLES.USER]} />}>
             <Route path="/" element={<Home />} />
           </Route>
 
-          <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}>
+          <Route element={<RequireAuth allowedRoles={[ROLES.EDITOR]} />}>
             <Route path="editor" element={<Editor />} />
           </Route>
 
-          <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+          <Route element={<RequireAuth allowedRoles={[ROLES.ADMIN]} />}>
             <Route path="admin" element={<Admin />} />
           </Route>
 
           <Route
-            element={<RequireAuth allowedRoles={[ROLES.Editor, ROLES.Admin]} />}
+            element={<RequireAuth allowedRoles={[ROLES.EDITOR, ROLES.ADMIN]} />}
           >
             <Route path="lounge" element={<Lounge />} />
           </Route>
